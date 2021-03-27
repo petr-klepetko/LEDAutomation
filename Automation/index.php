@@ -5,7 +5,7 @@ echo "{";
 /**
  * Reset the strip if neccessary
  */
-$output                     = shell_exec("curl 'localhost/led/reset/'");
+$output                     = shell_exec("curl 'localhost/Led/Reset/'");
 echo 			    "\"reset_output\": $output,";
 
 /** 
@@ -73,7 +73,7 @@ function calculateMode($clouds, $isDay)
      * Protection, 1000% of certainty
      */
     if ($mode == 'user') {
-        $userColor          = json_decode(file_get_contents("../led/color/userColor.json"), true);
+        $userColor          = json_decode(file_get_contents("../Led/Color/userColor.json"), true);
 
         $red                = $userColor['red'];
         $green              = $userColor['green'];
@@ -164,7 +164,7 @@ $green                      = $colors['green'];
 $blue                       = $colors['blue'];
 
 /** call endpoint with colors */
-$output                     = shell_exec("sudo curl 'localhost/led/color/?mode=rgb&red=$red&green=$green&blue=$blue'");
+$output                     = shell_exec("sudo curl 'localhost/Led/Color/?mode=rgb&red=$red&green=$green&blue=$blue'");
 echo "\"page\": \"automation\"}";
 
 
