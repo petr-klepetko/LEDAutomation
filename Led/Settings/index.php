@@ -26,7 +26,7 @@
 <body>
     <main>
 
-<?php include __DIR__ . '/../includes/topMenu.php' ?>
+<?php include __DIR__ . '/../Includes/topMenu.php' ?>
 
 <div class="sliderContainer">
     <p>Základní nastavení:</p>

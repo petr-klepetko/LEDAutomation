@@ -1,0 +1,31 @@
+{
+    "schedule": {
+        "start": "08:00",
+        "end": "20:30"
+    },
+    "nightShift": {
+        "schedule": {
+            "start": "08:00",
+            "end": "20:30"
+        },
+        "color": {
+            "red": "200",
+            "green": "200",
+            "blue": "200"
+        }
+    },
+    "days": {
+        "MON": true,
+        "TUE": true,
+        "WED": true,
+        "THU": true,
+        "FRI": true,
+        "SAT": true,
+        "SUN": true
+    },
+    "intensity": "1",
+    "apiKey": "f3c99f0f47b9db5df7a2e0a2a36bff43",
+    "city": "Prague",
+    "units": "metric",
+    "mode": "automatic"
+}

@@ -3,7 +3,7 @@
 		<button id="blue">Modrá</button>
 		<button id="off">Vypnout</button> -->
 <?php
-$currentColor = json_decode(file_get_contents("../color/currentColor.json"), true);
+$currentColor = json_decode(file_get_contents("../Color/currentColor.json"), true);
 ?>
 
 <!DOCTYPE html>
@@ -16,12 +16,12 @@ $currentColor = json_decode(file_get_contents("../color/currentColor.json"), tru
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="ledControl.js"></script>
-    <link rel="stylesheet" href="/led/styles.css">
+    <link rel="stylesheet" href="/Led/styles.css">
 </head>
 
 <body>
     <main>
-<?php include __DIR__ . '/../includes/topMenu.php' ?>
+<?php include __DIR__ . '/../Includes/topMenu.php' ?>
 
 <div class="sliderContainer">
     <p>Vyberte Barvu:</p>
@@ -48,3 +48,4 @@ $currentColor = json_decode(file_get_contents("../color/currentColor.json"), tru
 </div>
 
 <?php include __DIR__ . '/includes/bottom.php' ?>
+

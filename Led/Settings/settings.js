@@ -1,19 +1,19 @@
 $(document).ready(() => {
-    let modeRange = $('#modeRange');
+    let modeRange       = $('#modeRange');
     let mode;
-    let resetButton = $('#resetButton');
+    let resetButton     = $('#resetButton');
 
     modeRange.on('change', () => {
-        let modeNumber = modeRange[0].value;
+        let modeNumber  = modeRange[0].value;
 
         console.log(modeNumber);
 
         if (modeNumber == 0) {
-            mode = 'automatic';
+            mode        = 'automatic';
         } else if (modeNumber == 1) {
-            mode = 'user';
+            mode        = 'user';
         } else {
-            mode = 'automatic';
+            mode        = 'automatic';
             //TODO nějaká zpráva o erroru
         }
 
@@ -23,9 +23,10 @@ $(document).ready(() => {
     });
 
     resetButton.on('click', () => {
-        $.get('../Reset/');
+        console.log($.get('../Reset/'));
     });
 
 });
+
 
 

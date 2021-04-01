@@ -1,14 +1,19 @@
 <?php
 
+header('Content-type: application/json');
+echo "{";
+
 /**
  * Calls the endpoint for saving colors to currentColors.json
  */
 function saveColors($red, $green, $blue)
 {
-    $command            = escapeshellcmd("curl 'localhost/Led/Color/SaveColors/?red=$red&green=$green&blue=$blue'");
+    $command            = "curl 'localhost/Led/Color/SaveColors/?red=$red&green=$green&blue=$blue'";
     $output             = shell_exec($command);
 
-    echo                "Colors have been saved. '$output' command: $command";
+    //echo                "Colors have been saved. '$output' command: $command";
+    echo 			    "\"save_color_info\": \"Colors have been saved\",";
+    echo 			    "\"save_color_command_output\": $output,";
 };
 
 /**
@@ -20,12 +25,12 @@ if (!empty($_GET['mode'])) {
     /** If parameter mode is 'word', script expects name of the color */
     if ($mode === 'word' && !empty($_GET['color'])) {
         $color          = $_GET['color'];
-        echo            "Showing exact color - $color";
+        echo 		    "\"info\": \"Showing exact color - $color\",";
         $command        = escapeshellcmd("sudo -u root python3 $color.py");
         $output         = shell_exec($command);
-        echo            "\n$output";
+        echo 		    "\"python_script_output\": \"$output\",";
     } else if ($mode === 'word') {
-        echo            "\nThe attribute 'color' is not present in url, moving forward. ";
+        echo 			"\"info\": \"The attribute 'color' is not present in url, moving forward\",";
     }
 
     /** If parameter 'mode' is 'rgb', scripts expects 3 values for RGB */
@@ -48,7 +53,7 @@ if (!empty($_GET['mode'])) {
             $blueValue  = 0;
         }
 
-        echo            "\nShowing the exact color of Color($redValue, $greenValue, $blueValue)";
+        echo            "\"response\": \"Showing the exact color of Color($redValue, $greenValue, $blueValue)\",";
 
         $command        = escapeshellcmd("sudo -u root python3 lightOn.py $redValue $greenValue $blueValue");
         $output         = shell_exec($command);
@@ -56,6 +61,8 @@ if (!empty($_GET['mode'])) {
         saveColors($redValue, $greenValue, $blueValue);
     }
 } else {
-    echo                "seems like the attribute 'mode' isn't properly specified";
+    echo                "\"response\": \"seems like the attribute 'mode' isn't properly specified\",";
 }
+
+echo                    "\"page\": \"SaveUserColors\"}";
 

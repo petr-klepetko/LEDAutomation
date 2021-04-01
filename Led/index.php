@@ -11,14 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="/led/intensity.js"></script>
-    <link rel="stylesheet" href="/led/styles.css">
+    <script src="/Led/intensity.js"></script>
+    <link rel="stylesheet" href="/Led/styles.css">
 </head>
 
 <body>
     <main>
 
-<?php include __DIR__ . '/includes/topMenu.php' ?>
+<?php include __DIR__ . '/Includes/topMenu.php' ?>
 
 <div class="sliderContainer">
     <p>Nastavte ruční intenzitu světla:</p>
@@ -32,3 +32,4 @@
 </div>
 
 <?php include __DIR__ . '/includes/bottom.php' ?>
+

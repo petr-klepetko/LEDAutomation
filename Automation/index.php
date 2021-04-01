@@ -6,13 +6,13 @@ echo "{";
  * Reset the strip if neccessary
  */
 $output                     = shell_exec("curl 'localhost/Led/Reset/'");
-echo 			    "\"reset_output\": $output,";
+echo                         "\"reset_output\": $output,";
 
 /** 
  * Getting the weather 
  */
 $output                     = shell_exec("curl 'localhost/Automation/Weather/'");
-
+//echo 			            "\"weather_output\": $output,";
 /**
  * Processing the json result 
  */
@@ -23,6 +23,8 @@ $sunrise                    = $weather->sys->sunrise;
 $sunset                     = $weather->sys->sunset;
 $now                        = time();
 
+//echo                        "\"weather\": $output,";
+
 /**
  * Logic that decides what will happen 
  */
@@ -32,6 +34,18 @@ $now                        = time();
  */
 function isDay($sunrise, $sunset, $now)
 {
+    echo                        "\"sunrise\": \"$sunrise\",";
+    echo                        "\"sunset\": \"$sunset\",";
+    echo                        "\"now\": \"$now\",";
+
+    echo                        "\"weather_errors\":\"";
+    if (empty($sunrise)) {
+        echo                    "sunrise_not_present ";
+    }
+    if (empty($sunset)) {
+        echo                    "sunset_not_present";
+    }
+    echo                    "\",";
     if ($sunrise < $now and $now < $sunset) {
         return              true;
     } else {
@@ -106,9 +120,9 @@ function calculateMode($clouds, $isDay)
             if ($isDay) {
                 /** if it is cloudy, it gets more light */
                 if ($clouds > 90) {
-                    $red    = $clouds * $red / 100;
-                    $green  = $clouds * $green / 100;
-                    $blue   = $clouds * $blue / 100;
+                    $red    = $clouds       * $red / 100;
+                    $green  = $clouds       * $green / 100;
+                    $blue   = $clouds       * $blue / 100;
                 }
                 /** If it is night, there will be no blue color */
             } else {
@@ -120,16 +134,17 @@ function calculateMode($clouds, $isDay)
             $green          = round($green  * $intensity / 100);
             $blue           = round($blue   * $intensity / 100);
 
+            $isDay = intval($isDay);
             /** Construct the response */
-            echo "\"isDay\": \"$isDay\",";
-            echo "\"clouds\": \"$clouds\",";
-            echo "\"intensity\": \"$intensity\",";
+            echo            "\"isDay\": \"$isDay\",";
+            echo            "\"clouds\": \"$clouds\",";
+            echo            "\"intensity\": \"$intensity\",";
 
-            echo "\"red\": \"$red\",";
-            echo "\"green\": \"$green\",";
-            echo "\"blue\": \"$blue\",";
+            echo            "\"red\": \"$red\",";
+            echo            "\"green\": \"$green\",";
+            echo            "\"blue\": \"$blue\",";
 
-            echo "\"mode\": \"$mode\",";
+            echo            "\"mode\": \"$mode\",";
 
             return [
                 'red'       => $red,
@@ -156,7 +171,7 @@ function calculateMode($clouds, $isDay)
 /**
  * execute what is supposed to happen 
  */
-$colors = calculateMode($clouds, isDay($sunrise, $sunset, $now));
+$colors = calculateMode($clouds, isDay(intval($sunrise), intval($sunset), intval($now)));
 
 /** get values to variables */
 $red                        = $colors['red'];
@@ -165,6 +180,5 @@ $blue                       = $colors['blue'];
 
 /** call endpoint with colors */
 $output                     = shell_exec("sudo curl 'localhost/Led/Color/?mode=rgb&red=$red&green=$green&blue=$blue'");
-echo "\"page\": \"automation\"}";
 
-
+echo                        "\"page\": \"automation\"}";

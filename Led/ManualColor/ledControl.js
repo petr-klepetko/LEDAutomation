@@ -4,14 +4,14 @@ $(document).ready(() => {
 	 * */
 	let lock = false;
 
-	let redRange = $('#redRange');
-	let greenRange = $('#greenRange');
-	let blueRange = $('#blueRange');
+	let redRange 			= $('#redRange');
+	let greenRange 			= $('#greenRange');
+	let blueRange 			= $('#blueRange');
 
-	let doButton = $('#doButton');
+	let doButton 			= $('#doButton');
 
-	let redValueOutput = $('#redValueOutput');
-	let greenValueOutput = $('#greenValueOutput');
+	let redValueOutput 		= $('#redValueOutput');
+	let greenValueOutput 	= $('#greenValueOutput');
 	let blueValueOutput = $('#blueValueOutput');
 
 	let ranges = [];
@@ -36,7 +36,6 @@ $(document).ready(() => {
 		redValueOutput.html(redRange[0].value);
 		greenValueOutput.html(greenRange[0].value);
 		blueValueOutput.html(blueRange[0].value);
-
 	}
 
 	function turnRgb() {
@@ -55,9 +54,9 @@ $(document).ready(() => {
 		//		$.get(`./color/?mode=rgb&red=${redRange[0].value}&green=${greenRange[0].value}&blue=${blueRange[0].value}`);
 		//turnRgb();
 
-		ranges[1] = redRange;
-		ranges[2] = greenRange;
-		ranges[3] = blueRange;
+		ranges[1] 			= redRange;
+		ranges[2] 			= greenRange;
+		ranges[3] 			= blueRange;
 
 		for (let i = 1; i < 4; i++) {
 			ranges[i].on('change', turnRgb);
@@ -101,5 +100,6 @@ $(document).ready(() => {
 
 
 });
+
 
 
